@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina principal</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+        <header>
+            <nav>
+                <button id="login-btn" onclick="goToLogin()">Iniciar Sesión</button>
+                <form2 action="/logout" method="post">
+                    <spanUser class="Welcome" id="username" style="display:none"></spanUser >
+                    <button id="logout-btn" style="display:none" type="submit" onClick="logout()">Cerrar Sesión</button>
+                </form2>
+            </nav>
+        </header>
+    
+        <script>    
+            let isLoggedIn = true; 
+            
+            function goToLogin() {
+                window.location.href = "index.html";
+            }
+              
+function updateUI() {
+    fetch("/username", {
+        method: "GET",
+    })
+    .then(res => res.text())
+    .then(data => {
+        if (data) {
+            document.getElementById("login-btn").innerHTML = "Cerrar sesión";
+            document.getElementById("login-btn").style.display = "block";
+            document.getElementById("username").innerHTML = "Bienvenido, " + data;
+            document.getElementById("username").style.display = "block";
+            isLoggedIn = true;
+        } else {
+            document.getElementById("login-btn").innerHTML = "Iniciar sesión";
+            document.getElementById("login-btn").style.display = "block";
+            document.getElementById("username").style.display = "none";
+        }
+    });
+}
+updateUI()
+
+
+     
+         </script>          
+</body>
+</html>
